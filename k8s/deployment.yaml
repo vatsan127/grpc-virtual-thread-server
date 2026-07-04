@@ -21,6 +21,12 @@ spec:
           ports:
             - name: grpc
               containerPort: 9090
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-Djdk.tracePinnedThreads=full"
+          volumeMounts:
+            - name: logs
+              mountPath: /app/logs
           resources:
             requests:
               cpu: "4000m"
@@ -28,6 +34,9 @@ spec:
             limits:
               cpu: "6000m"
               memory: "2Gi"
+      volumes:
+        - name: logs
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
