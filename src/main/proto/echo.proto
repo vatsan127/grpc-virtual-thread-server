@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.github.grpc_virtual_thread_server.grpc";
+option java_outer_classname = "EchoProto";
+
+package echo;
+
+service EchoService {
+  rpc Echo (EchoRequest) returns (EchoReply) {}
+}
+
+message EchoRequest {
+  string message = 1;
+  int64 delay_millis = 2;
+}
+
+message EchoReply {
+  string message = 1;
+  string thread_name = 2;
+  bool virtual_thread = 3;
+  int64 delay_millis = 4;
+}
